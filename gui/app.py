@@ -7,15 +7,16 @@ from typing import Any
 if __package__ is None or __package__ == "":
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+tk: Any = None
+messagebox: Any = None
+ttk: Any = None
+ctk: Any = None
+
 try:
     import tkinter as tk
     from tkinter import messagebox, ttk
     import customtkinter as ctk
-except ImportError as exc:  # pragma: no cover - depends on system Tk availability
-    tk = None  # type: ignore[assignment]
-    messagebox = None  # type: ignore[assignment]
-    ttk = None  # type: ignore[assignment]
-    ctk = None  # type: ignore[assignment]
+except ImportError as exc:
     _CTK_IMPORT_ERROR = exc
 else:
     _CTK_IMPORT_ERROR = None
@@ -472,7 +473,7 @@ class BibliotecaApp(ctk.CTk if ctk is not None else object):
             self.repository.save()
             self._refresh_all_views()
             self._set_status(f"Livro salvo: {book.title}")
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             messagebox.showerror("Erro ao salvar livro", str(exc))
             self._set_status("Falha ao salvar livro.")
 
@@ -518,7 +519,7 @@ class BibliotecaApp(ctk.CTk if ctk is not None else object):
             self.repository.save()
             self._refresh_all_views()
             self._set_status(f"Histórico salvo para o livro {book.title}")
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             messagebox.showerror("Erro ao salvar histórico", str(exc))
             self._set_status("Falha ao salvar histórico.")
 
@@ -550,7 +551,7 @@ class BibliotecaApp(ctk.CTk if ctk is not None else object):
             self._build_ui()
             self._refresh_all_views()
             self._set_status(f"Dados carregados de {self.repository.storage_path}")
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             messagebox.showerror("Erro ao carregar", str(exc))
             self._set_status("Falha ao carregar banco SQLite.")
 
@@ -559,7 +560,7 @@ class BibliotecaApp(ctk.CTk if ctk is not None else object):
             self.repository.theme_mode = self.theme_mode
             self.repository.save()
             self._set_status(f"Dados salvos em {self.repository.storage_path}")
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             messagebox.showerror("Erro ao salvar", str(exc))
             self._set_status("Falha ao salvar banco SQLite.")
 
