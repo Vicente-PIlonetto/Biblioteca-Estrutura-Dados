@@ -11,21 +11,20 @@ enum StatusHistorico {
 };
 
 typedef struct Historico {
-  unsigned int idUsuario;
-
   Livro* livro;
 
   char* dataEmprestimo;
   char* dataDevolucao;
 
+  unsigned int idUsuario;
   enum StatusHistorico status;
 } Historico;
 
 Historico* criarHistorico(
   unsigned int idUsuario,
   Livro* livro,
-  char* dataEmprestimo,
-  char* dataDevolucao,
+  const char* dataEmprestimo,
+  const char* dataDevolucao,
   enum StatusHistorico status
 );
 
