@@ -13,26 +13,19 @@ Livro *criarLivro(
   Livro *tmp = (Livro *)malloc(sizeof(Livro));
   if (tmp == NULL) return NULL;
 
-  l = strlen(titulo);
-  tmp->titulo = (char *)malloc(sizeof(char) * l + 1);
+  tmp->titulo = strdup(titulo);
+
   if (tmp->titulo == NULL) {
     free(tmp);
-
     return NULL;
   }
-  tmp->titulo[l] = '\0';
-  strcpy(tmp->titulo, titulo);
 
-  l = strlen(autor);
-  tmp->autor = (char *)malloc(sizeof(char) * l + 1);
+  tmp->autor = strdup(autor);
   if (tmp->autor == NULL) {
     free(tmp->titulo);
     free(tmp);
     return NULL;
   }
-
-  strcpy(tmp->autor, autor);
-  tmp->autor[l] = '\0';
 
   tmp->anoPublicacao = anoPublicacao;
   tmp->quantidadeDisponivel = quantidadeDisponivel;
@@ -82,60 +75,18 @@ char compararDisponivelLivro(Livro* livro){
   return livro->quantidadeDisponivel;
 }
 
-char compararTituloIgualLivro(Livro* livro, char* texto){
+char compararTituloIgualLivro(Livro* livro, const char* texto){
   return strcmp(livro->titulo, texto) == 0;
 }
 
-char compararTituloDentroLivro(Livro* livro, char* texto){
+char compararTituloDentroLivro(Livro* livro, const char* texto){
   return strstr(livro->titulo, texto) != NULL;
 }
 
-char compararAutorIgualLivro(Livro* livro, char* texto){
+char compararAutorIgualLivro(Livro* livro, const char* texto){
   return strcmp(livro->autor, texto) == 0;
 }
 
-char compararAutorDentroLivro(Livro* livro, char* texto){
+char compararAutorDentroLivro(Livro* livro, const char* texto){
   return strstr(livro->autor, texto) != NULL;
-}
-
-char *obterBinarioLivro(Livro* livro, unsigned long* lenArquivo){
-  unsigned long lTitulo = strlen(livro->titulo);
-  unsigned long lAutor = strlen(livro->autor);
-
-  unsigned long lTotal = sizeof(unsigned long) * 2 + sizeof(int) + sizeof(short) * 2 + lTitulo + lAutor;
-  char* rawData = malloc(lTotal);
-  *lenArquivo = lTotal;
-
-  memcpy(rawData, &lTitulo, sizeof(unsigned long));
-  memcpy(
-    rawData + sizeof(unsigned long),
-    livro->titulo,
-    lTitulo
-  );
-  memcpy(
-    rawData + sizeof(unsigned long) + lTitulo,
-    &lAutor,
-    sizeof(unsigned long)
-  );
-  memcpy(
-    rawData + sizeof(unsigned long)*2 + lTitulo,
-    livro->autor,
-    lAutor
-  );
-  memcpy(
-    rawData + sizeof(unsigned long)*2 + lTitulo + lAutor,
-    &livro->codigo,
-    sizeof(unsigned int)
-  );
-  memcpy(
-    rawData + sizeof(unsigned long)*2 + lTitulo + lAutor + sizeof(unsigned int),
-    &livro->anoPublicacao,
-    sizeof(short)
-  );
-  memcpy(
-    rawData + sizeof(unsigned long)*2 + lTitulo + lAutor + sizeof(unsigned int) + sizeof(short),
-    &livro->quantidadeDisponivel,
-    sizeof(short)
-  );
-  return rawData;
 }

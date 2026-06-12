@@ -43,20 +43,18 @@ char compararDisponivelLivro(Livro* livro);
 /*
 Compara se o titulo é igual ao especificado
 */
-char compararTituloIgualLivro(Livro* livro, char* texto);
+char compararTituloIgualLivro(Livro* livro, const char* texto);
 /*
 Compara se o texto especificado está dentro do livro
 */
-char compararTituloDentroLivro(Livro* livro, char* texto);
+char compararTituloDentroLivro(Livro* livro, const char* texto);
 /*
 Compara se o autor é igual ao especificado
 */
-char compararAutorIgualLivro(Livro* livro, char* texto);
+char compararAutorIgualLivro(Livro* livro, const char* texto);
 /*
 Compara se o autor especificado está dentro do livro
 */
-char compararAutorDentroLivro(Livro* livro, char* texto);
-
-char *obterBinarioLivro(Livro* livro, unsigned long* lenArquivo);
+char compararAutorDentroLivro(Livro* livro, const char* texto);
 
 #endif

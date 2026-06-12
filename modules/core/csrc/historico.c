@@ -7,8 +7,8 @@
 Historico* criarHistorico(
   unsigned int idUsuario,
   Livro* livro,
-  char* dataEmprestimo,
-  char* dataDevolucao,
+  const char* dataEmprestimo,
+  const char* dataDevolucao,
   enum StatusHistorico status
 ){
   Historico* tmp = malloc(sizeof(Historico));
@@ -19,8 +19,12 @@ Historico* criarHistorico(
   tmp->idUsuario = idUsuario;
 
   tmp->livro = copiaLivro(livro);
+  if(tmp->livro == NULL){
+    free(tmp);
+    return  NULL;
+  }
 
-  tmp->dataEmprestimo = malloc(strlen(dataEmprestimo) + 1);
+  tmp->dataEmprestimo = strdup(dataEmprestimo);
 
   if(tmp->dataEmprestimo == NULL){
     liberarLivro(tmp->livro);
@@ -29,9 +33,7 @@ Historico* criarHistorico(
     return NULL;
   }
 
-  strcpy(tmp->dataEmprestimo, dataEmprestimo);
-
-  tmp->dataDevolucao = malloc(strlen(dataDevolucao) + 1);
+  tmp->dataDevolucao = strdup(dataEmprestimo);
 
   if(tmp->dataDevolucao == NULL){
     free(tmp->dataEmprestimo);
@@ -40,8 +42,6 @@ Historico* criarHistorico(
 
     return NULL;
   }
-
-  strcpy(tmp->dataDevolucao, dataDevolucao);
 
   tmp->status = status;
 

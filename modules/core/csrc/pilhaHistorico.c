@@ -19,16 +19,15 @@ PilhaHistorico* adicionarHistorico(
   PilhaHistorico* pilha,
   Historico* item
 ){
-  PilhaHistorico* tmp = malloc(sizeof(PilhaHistorico));
+  PilhaHistorico* aux = criarPilhaHistorico(item);
 
-  if(tmp == NULL)
+  if(aux == NULL){
     return pilha;
+  }
 
-  tmp->item = item;
+  aux->prox = pilha;
 
-  tmp->prox = pilha;
-
-  return tmp;
+  return aux;
 }
 
 
