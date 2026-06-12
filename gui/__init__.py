@@ -1,0 +1,1 @@
+"""Biblioteca GUI package."""
