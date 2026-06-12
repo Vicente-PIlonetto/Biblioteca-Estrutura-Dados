@@ -48,7 +48,6 @@ Historico* criarHistorico(
   return tmp;
 }
 
-
 Historico* copiaHistorico(Historico* historico){
   return criarHistorico(
     historico->idUsuario,

@@ -1,11 +1,17 @@
 import sys
 from pathlib import Path
+import core
 
 if __package__ is None or __package__ == "":
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from gui.app import run_app
 
+
+if sys.__name__ == 'nt':
+    core.livro
+else:
+    core.lista_encadeada
 
 if __name__ == "__main__":
     try:

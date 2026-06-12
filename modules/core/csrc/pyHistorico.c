@@ -1,5 +1,3 @@
-// pyHistorico.c
-
 #include "../include/pyHistorico.h"
 #include "../include/historico.h"
 
@@ -226,35 +224,35 @@ PyMemberDef Py_Historico_members[] = {
         T_OBJECT_EX,
         offsetof(PyHistorico, livro),
         READONLY,
-        "Livro associado ao histórico"
+        NULL
     },
     {
         "data_emprestimo",
         T_STRING,
         offsetof(PyHistorico, dataEmprestimo),
         READONLY,
-        "Data do empréstimo"
+        NULL
     },
     {
         "data_devolucao",
         T_STRING,
         offsetof(PyHistorico, dataDevolucao),
         READONLY,
-        "Data da devolução"
+        NULL
     },
     {
         "id_usuario",
         T_UINT,
         offsetof(PyHistorico, idUsuario),
         READONLY,
-        "ID do usuário"
+        NULL
     },
     {
         "status",
         T_INT,
         offsetof(PyHistorico, status),
         READONLY,
-        "Status do histórico"
+        NULL
     },
     {NULL}
 };

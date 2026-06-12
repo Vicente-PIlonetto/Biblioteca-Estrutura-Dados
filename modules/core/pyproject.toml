@@ -9,7 +9,16 @@ version = "0.0.1"
 [tool.setuptools]
 package-dir = {"" = "src"}
 ext-modules = [
-    { name = "core", sources = ["csrc/core.c"] }
+    { name = "core", sources = [
+        "csrc/core.c",
+        "csrc/historico.c",
+        "csrc/listaEncadeada.c",
+        "csrc/livro.c",
+        "csrc/pilhaHistorico.c",
+        "csrc/pyHistorico.c",
+        "csrc/pyListaEncadeada.c",
+        "csrc/pyLivro.c"
+    ] }
 ]
 
 [tool.setuptools.packages.find]
